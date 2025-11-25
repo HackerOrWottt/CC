@@ -1,0 +1,92 @@
+Aim
+• To implement and analyze the solution to the 8 Queens Problem using 
+various algorithms (backtracking, constraints propagation, or heuristic 
+approaches).
+Objective
+1. To Develop Problem-Solving Skills in Constraint Satisfaction
+• The 8 Queens Problem is a classic example of a constraint satisfaction 
+problem (CSP), where solutions must adhere to specific constraints. The 
+objective is to enhance problem-solving skills by applying and 
+understanding constraint-based techniques.
+2. To Implement and Understand the Backtracking Algorithm
+• The primary goal is to implement the backtracking algorithm, which 
+systematically searches for solutions while minimizing unnecessary 
+checks. Through this, one can gain insight into recursive problem-solving 
+and optimization techniques.
+Theory
+1. Introduction to the Problem
+• Explanation of the 8 Queens Problem.
+• Importance of combinatorial optimization problems in computer science. • Applications of similar constraint satisfaction problems in AI, 
+scheduling, and optimization.
+2. Mathematical and Logical Foundation
+• Explanation of chessboard constraints.
+• Introduction to problem constraints: no two queens in the same row, 
+column, or diagonal.
+3. Algorithms to Solve the Problem
+• Backtracking Algorithm: Step-by-step breakdown of the backtracking 
+approach for placing queens on the board.
+• Constraint Propagation Techniques: Explanation of how constraints can 
+reduce the search space and make the solution more efficient.
+• Heuristic Approaches (Optional): Brief overview of more advanced 
+methods like genetic algorithms or simulated annealing, if applicable.
+4. Implementation
+• Code implementation of the backtracking solution (in a preferred 
+programming language like Python or C++).
+• Pseudocode for each algorithmic approach for easier understanding.
+• Visual representation of the chessboard for better comprehension of queen 
+placement.
+5. Testing and Evaluation
+• Test cases to ensure that solutions meet the constraints.
+
+import tkinter as tk
+
+N = 8
+
+def is_safe(board, row, col):
+    for i in range(row):
+        if board[i][col] == 1:
+            return False
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    for i, j in zip(range(row, -1, -1), range(col, N)):
+        if board[i][j] == 1:
+            return False
+    return True
+
+def solve_n_queens(board, row):
+    if row >= N:
+        return True
+    for col in range(N):
+        if is_safe(board, row, col):
+            board[row][col] = 1
+            if solve_n_queens(board, row + 1):
+                return True
+            board[row][col] = 0
+    return False
+
+def initialize_board():
+    return [[0 for _ in range(N)] for _ in range(N)]
+
+def display_solution(board):
+    window = tk.Tk()
+    window.title("8 Queens Solution")
+    window.geometry("400x400")
+    for row in range(N):
+        for col in range(N):
+            color = "white" if (row + col) % 2 == 0 else "gray"
+            cell = tk.Frame(window, width=50, height=50, bg=color)
+            cell.grid(row=row, column=col)
+            if board[row][col] == 1:
+                queen = tk.Label(cell, text="♛", font=("Arial", 24), fg="black")
+                queen.place(relx=0.5, rely=0.5, anchor="center")
+    window.mainloop()
+
+if __name__ == "__main__":
+    board = initialize_board()
+    if solve_n_queens(board, 0):
+        display_solution(board)
+    else:
+        print("No solution exists")
+• Analysis of time and space complexity for each solution method.
+• Comparison of different approaches in terms of performanc
