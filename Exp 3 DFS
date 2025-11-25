@@ -1,0 +1,147 @@
+Aim: Solve any problem by using depth first search.
+Objectives: 
+1. Traverse a graph or tree structure using Depth First Search (DFS).
+2. Systematically explore all nodes and edges in a depth-first manner.
+3. Identify solutions for specific problems, such as pathfinding or determining 
+connected components.
+4. Ensure all nodes are visited to complete tasks requiring full exploration.
+Theory: 
+What is DFS? 
+Depth First Search (DFS) is an algorithm used to traverse or search through graph or 
+tree structures by exploring as far as possible along each branch before backtracking. 
+Starting from a root node, DFS dives deep into each path until it reaches a node with 
+no unvisited adjacent nodes, then it backtracks to explore new paths. It uses a stack 
+(either explicitly or via recursion) to keep track of visited nodes, ensuring that each 
+node is visited only once. DFS is useful for tasks like detecting cycles, pathfinding, Problem Solving: DFS is employed in search algorithms to explore solutions to 
+problems like puzzles, games, and optimization problems (e.g., N-Queens, 
+Sudoku).
+• Game Trees: DFS is used in exploring game trees, where it helps AI agents 
+decide the best move by examining all possible future states.
+• Pathfinding: In AI navigation tasks, DFS helps find paths from a starting 
+point to a goal, though it may not always find the shortest path.
+• Constraint Satisfaction Problems: DFS is applied in solving problems like 
+scheduling and resource allocation by exploring all potential configurations 
+while ensuring that constraints are met.
+• Backtracking Algorithms: DFS is the basis for backtracking approaches in 
+AI, where it tries a potential solution and backs up if it reaches a dead-end, 
+useful in combinatorial problems.
+Steps to solve DFS Problem:
+1. Initialize:
+• Start with the root node or initial state.
+• Create an empty stack (or use recursion) to store the nodes to be explored.
+• Mark the starting node as visited.
+2. Explore the Current Node:
+• Push the current node onto the stack (if using an explicit stack).
+• If using recursion, the function call for the current node is placed on the call 
+stack.
+3. Check for Goal or Condition:
+• If the current node is the goal node or satisfies the required condition, return 
+the solution. 4. Visit Unvisited Neighbours:
+• For each unvisited neighbour of the current node, mark it as visited and push 
+it onto the stack (or make a recursive call).
+5. Backtrack if Necessary:
+• If a node has no unvisited neighbours (i.e., you've reached a dead-end), 
+backtrack by popping the stack and returning to the previous node (or return 
+from the recursive call).
+6. Repeat Until Goal is Found:
+• Continue this process of exploring nodes, visiting unvisited neighbors, and 
+backtracking until the goal is found or all nodes have been explored.
+7. End the Search:
+• The algorithm terminates either when the goal node is found or when all 
+possible nodes have been visited (in case no solution exists).
+Conclusion: 
+Depth First Search (DFS) is an effective algorithm for traversing and exploring graph 
+or tree structures, particularly useful for tasks that require deep exploration of nodes 
+before backtracking. Its stack-based approach makes it ideal for applications like 
+pathfinding, cycle detection, and solving puzzles where all possible paths must be 
+explored. DFS is efficient for sparse graphs and provides a foundation for more 
+complex algorithms, such as those for topological sorting and identifying connected
+
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def dfs_shortest_path(graph, start, end, path=None):
+    if path is None:
+        path = []
+
+    path = path + [start]
+    print(f"Exploring node: {start}, Current path: {path}")
+
+    if start == end:
+        print(f"Reached the end node: {end}, Path: {path}")
+        return path
+
+    shortest = None
+
+    for node in graph[start]:
+        if node not in path:
+            print(f"Going to node: {node} from node: {start}")
+            newpath = dfs_shortest_path(graph, node, end, path)
+
+            if newpath:
+                if shortest is None or len(newpath) < len(shortest):
+                    shortest = newpath
+
+    if shortest:
+        print(f"Backtracking to node: {start}, Shortest path found: {shortest}")
+        print(f"Length of the shortest path: {len(shortest)}")
+    else:
+        print(f"Backtracking to node: {start}, No path found.")
+
+    return shortest
+
+
+def draw_graph(graph, shortest_path=None):
+    G = nx.Graph()
+
+    for node, neighbors in graph.items():
+        for neighbor in neighbors:
+            G.add_edge(node, neighbor)
+
+    pos = nx.spring_layout(G)
+    plt.figure(figsize=(10, 7))
+
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_color='gray',
+            node_size=2000, font_size=15, font_weight='bold')
+
+    if shortest_path:
+        path_edges = list(zip(shortest_path, shortest_path[1:]))
+
+        nx.draw_networkx_edges(G, pos, edgelist=path_edges,
+                               edge_color='red', width=2, style='dashed')
+
+        nx.draw_networkx_nodes(G, pos, nodelist=shortest_path,
+                               node_color='lightgreen')
+
+    plt.title("Graph Visualization with Shortest Path Highlighted")
+    plt.show()
+
+
+if __name__ == "__main__":
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['A', 'D', 'E'],
+        'C': ['A', 'F'],
+        'D': ['B'],
+        'E': ['B', 'F'],
+        'F': ['C', 'E']
+    }
+
+    print("The graph is:")
+    for node, neighbors in graph.items():
+        print(f"{node}: {', '.join(neighbors)}")
+
+    start_node = 'A'
+    end_node = 'F'
+
+    print(f"\nFinding shortest path from {start_node} to {end_node}...\n")
+
+    shortest_path = dfs_shortest_path(graph, start_node, end_node)
+
+    if shortest_path:
+        print(f"\nShortest path from {start_node} to {end_node}: {shortest_path}")
+        print(f"Length of the shortest path: {len(shortest_path)}")
+    else:
+        print(f"No path found from {start_node} to {end_node}.")
+
+    draw_graph(graph, shortest_path)
