@@ -1,0 +1,167 @@
+Aim: To solve the 8-puzzle problem using the Best-First Search algorithm and compare the 
+efficiency of two heuristic functions: the Misplaced Tile heuristic and the Manhattan Distance 
+heuristic.
+Objective:
+1. To understand the representation of the 8-puzzle problem and its solution space.
+2. To implement the Best-First Search algorithm using suitable heuristics.
+3. To compare the performance of different heuristic strategies in solving the puzzle.
+Theory:
+The 8-puzzle is a case study in artificial intelligence, with original objectives to arrange a 3x3 
+grid of tiles from a scrambled initial state to a specified goal arrangement. The puzzle comprises 
+8 numbered tiles and 1 blank space-stipulating a movement mechanism that moves the tiles in 
+use to the adjacent space vacated by the blank tile-by-shelling out the blank either horizontally 
+or vertically. The objective is to attain a goal state in the shortest most steps possible.
+Best First Search
+Best First Search (BFS) is a heuristic-driven search strategy that exploits the choices made by 
+selecting to expand the most promising node based on an evaluation function. In the 8-puzzle, 
+Best First Search selects nodes to expand based on an estimate of their desirableness, quantified 
+through some heuristic measure.
+The Best-First Search algorithm uses a heuristic to evaluate which state to explore next.:
+Manhattan Distance Heuristic (h2): Computes the sum of the distances of the tiles from their 
+goal positions, where distance is defined as the sum of the vertical and horizontal distances.
+The Best-First Search algorithm selects the node with the lowest heuristic value for expansion, 
+which helps in guiding the search toward the goal efficiently.
+Advantages Of Best First Search:
+1. Efficient Pathfinding: BFS prioritizes nodes that are closer to the goal based on a 
+heuristic, which can lead to faster solutions, especially with informed heuristics like Manhattan Distance or Misplaced Tile. This is particularly useful for puzzles like the 
+8-puzzle, where the search space can be large.
+2. Reduced Search Space: By focusing on nodes that appear closer to the goal state, 
+BFS can significantly reduce the number of nodes explored, making it more efficient 
+than uninformed search algorithms like Breadth-First Search or Depth-First Search.
+3. Flexibility with Heuristics: BFS can use different heuristic functions, allowing 
+flexibility and the ability to optimize based on heuristic accuracy. For example, the 
+Manhattan Distance heuristic is more effective for the 8-puzzle than the Misplaced Tile 
+heuristic because it considers the actual distance.
+Disadvantages Of Best First Search:
+1. Heuristic Dependency: The performance of BFS heavily relies on the quality of the 
+heuristic. An inaccurate heuristic can lead to poor performance, causing the algorithm 
+to explore many unnecessary nodes, slowing down the search.
+2. Computational Complexity For Deep Solutions : For puzzles that require a large 
+number of moves to reach the solution, BFS can become computationally expensive 
+due to the high depth and the need to evaluate many potential paths, especially if the 
+heuristic is less effective.
+3. Potentially High Memory Usage: BFS maintains a priority queue with nodes to be 
+explored, which can consume significant memory, especially if the search space is large 
+or if many states have similar heuristic values. For large or complex puzzles, this can 
+lead to memory exhaustion.
+Applications Of Best First Search:
+1. Pathfinding in Games: BFS algorithms are frequently employed in video games 
+to find how a character or an object can reach its goal from the starting point 
+without colliding with any other object in the fastest manner
+2. Robotics: In robotics, BFS algorithms are useful for applying movement in the 
+presence of navigation. These algorithms help the robots look for the best paths in 
+real-time as they move and perform duties. 3. Artificial Intelligence: BFS algorithms are very important to AI when it comes to 
+providing solutions to difficult issues like NL, ML, and decision-making
+solutions. They support AI systems in assessing different options and deciding 
+which option to take.
+4. Navigation Systems: Navigation systems, including GPS, use BFS algorithms to 
+determine the shortest and quickest means of traveling. The algorithms' efficiency 
+in calculating and generating preferable routes in a short span of time, especially 
+when viewing large volumes of traffic data, benefits this application.
+Introduction:
+The 8-puzzle problem is an interesting case in state exploration and in pathfinding, which 
+makes it a good candidate for search algorithm study. Best-First Search, as a heuristic-based 
+search, pays more attention to nodes that seem close to the goal and is simpler than uninformed 
+search strategies, such as Breadth-First Search. We will implement the search algorithm with 
+the parameters of the heuristics used: Misplaced Tiles and Manhattan Distance-and by the end-
+compare their performance for what it takes to achieve the solution in the 8-puzzle problem.
+Implementation:
+1. Define the State Representation: Each state will be represented by a tuple containing 
+the configuration of the tiles and the position of the empty space.
+2. Heuristic Functions: Implement the two heuristics (h1 and h2) to evaluate the cost of 
+reaching the goal.
+3. Best-First Search Algorithm: Implement the search algorithm that utilizes a priority 
+queue to manage nodes based on their heuristic values.
+4. Goal Test: Check if the current state matches the goal state.
+5. Execution: Run the algorithm on a set of initial states and record the number of nodes 
+expanded and the solution path length for both heuristics.
+
+Code :
+
+import tkinter as tk
+import time
+
+class RobotTraversalApp:
+    def __init__(self, root, start, goal):
+        self.root = root
+        self.root.title("Robot Traversal Using Means-End Analysis")
+
+        self.start, self.goal = start, goal
+        self.current_position = start
+
+        # Canvas for grid and robot movement
+        self.canvas = tk.Canvas(self.root, width=500, height=500, bg="white")
+        self.canvas.pack()
+
+        self.draw_grid()
+
+        # Start button to begin the traversal
+        tk.Button(self.root, text="Start Traversal", command=self.start_traversal).pack(pady=20)
+
+        # Output labels for written and flow output
+        self.output_label = tk.Label(self.root, font=("Helvetica", 12))
+        self.output_label.pack()
+
+        self.flow_label = tk.Label(self.root, text="Flow of Movement:", font=("Helvetica", 12))
+        self.flow_label.pack(pady=10)
+
+    def draw_grid(self):
+        """Draws a 10x10 grid with start and goal positions."""
+        for i in range(0, 501, 50):
+            self.canvas.create_line(i, 0, i, 500, fill="gray")
+            self.canvas.create_line(0, i, 500, i, fill="gray")
+
+        # Draw start and goal rectangles (small filled squares)
+        self.canvas.create_rectangle(self.start[0]*50 + 10, self.start[1]*50 + 10,
+                                     self.start[0]*50 + 40, self.start[1]*50 + 40,
+                                     fill="green", outline="black")
+        self.canvas.create_rectangle(self.goal[0]*50 + 10, self.goal[1]*50 + 10,
+                                     self.goal[0]*50 + 40, self.goal[1]*50 + 40,
+                                     fill="red", outline="black")
+
+    def update_output(self, text):
+        """Updates the output label with current position and flow."""
+        self.output_label.config(text=text)
+        self.root.update_idletasks()
+
+    def move_robot(self):
+        """Moves robot step-by-step toward the goal."""
+        x, y = self.current_position
+
+        while (x, y) != self.goal:
+            dx, dy = self.goal[0] - x, self.goal[1] - y
+
+            if dx:
+                x += 1 if dx > 0 else -1
+            if dy:
+                y += 1 if dy > 0 else -1
+
+            self.current_position = (x, y)
+            self.update_robot_position()
+            self.update_output(f"Current Position: {self.current_position}")
+            self.flow_label.config(text=f"Moving to: {self.current_position}")
+            self.root.update_idletasks()
+            time.sleep(0.5)
+
+    def update_robot_position(self):
+        """Updates the robot's position on the canvas."""
+        # remove previous robot
+        self.canvas.delete("robot")
+        x, y = self.current_position
+        self.canvas.create_rectangle(x*50 + 10, y*50 + 10, x*50 + 40, y*50 + 40,
+                                     fill="blue", outline="black", tags="robot")
+
+    def start_traversal(self):
+        """Starts the robot traversal."""
+        self.update_output(f"Starting at {self.start}")
+        # draw initial robot position
+        self.update_robot_position()
+        self.move_robot()
+        self.update_output(f"Goal Reached at {self.goal}!")
+
+if __name__ == "__main__":
+    start_pos = (2, 3)
+    goal_pos = (5, 7)
+    root = tk.Tk()
+    app = RobotTraversalApp(root, start_pos, goal_pos)
+    root.mainloop()
