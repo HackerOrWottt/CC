@@ -1,0 +1,142 @@
+Aim: Solve any problem by using Bredth first search. 
+Objectives: 
+The objective of this problem is to understand and implement the Breadth-First Search algorithm. 
+BFS is used in graph traversal to explore nodes level by level, which makes it suitable for finding 
+the shortest path in an unweighted graph.
+Theory: 
+What is DFS? 
+Breadth-First Search (BFS) is a graph traversal algorithm that explores vertices in a graph layer 
+by layer. Starting from a source node, BFS explores all nodes at the current level before moving 
+to the next level, ensuring that each node is reached in the minimum number of steps from the 
+starting node. It uses a queue data structure to maintain the list of nodes to be explored, marking 
+each visited node to avoid cycles.
+BFS is especially useful for finding the shortest path in an unweighted graph, determining the level 
+of each node relative to the starting node, and exploring all nodes connected to a source.
+Key Characteristics of BFS:
+1. Suitable for unweighted graphs to find the shortest path.
+2. Explores all neighbors of a node before moving to the next level.
+3. Uses a queue to maintain the exploration order.
+4. Ensures all nodes are visited once, preventing cycles and redundant checks.
+Steps to solve BFS Problem: 
+1. Define the Graph: Represent the graph as an adjacency list, where each node has a list of 
+its neighboring nodes.
+2. Initialize the Queue: Add the starting node to the queue and mark it as visited. • While the queue is not empty, dequeue a node.
+• For each unvisited neighbor of this node, mark it as visited, enqueue it, and update 
+any necessary information (e.g., distance, parent node).
+4. End Condition: Stop the search when the target node is found or when all reachable nodes 
+are visited.
+5. Construct Path (if applicable): If solving for a path, backtrack from the target to the start 
+using parent references to construct the shortest path.
+Advantages of BFS:
+1. Guaranteed Optimal Solutions: BFS finds the shortest path in terms of edges, making it 
+optimal for unweighted graphs.
+2. Completeness: BFS will explore all possible nodes and find a solution if one exists, 
+ensuring completeness.
+3. Suitable for Finding Paths: Ideal for scenarios requiring all possible paths within certain 
+depths, such as shortest path calculations.
+Disadvantages of BFS:
+1. High Memory Usage: BFS can consume large amounts of memory, as it stores all nodes 
+at the current level before moving to the next.
+2. Slow for Large Graphs: It explores all neighbors level-by-level, making it slow for deep
+or large search spaces.
+3. Not Suitable for Weighted Graphs: BFS doesn’t handle weighted edges efficiently, as it 
+only considers edge counts.
+Applications of BFS:
+1. Pathfinding: Used in route planning, such as GPS navigation, to find the shortest 
+unweighted path.
+2. Social Networks: Identifies connections (e.g., mutual friends) by finding the shortest path 
+between nodes.
+3. Web Crawling: Used to explore all links from a starting webpage level-by-level.
+4. AI Game Solving: Applies to puzzles like the Rubik’s Cube and games to find solutions 
+in minimum moves. Conclusion: 
+Breadth-First Search (BFS) is an efficient algorithm for finding the shortest path in an unweighted 
+graph. It explores nodes layer by layer, making it effective in applications like route finding, 
+
+import networkx as nx
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from collections import deque
+import tkinter as tk
+from tkinter import messagebox
+
+def bfs_shortest_path(graph, start, end):
+    queue, visited = deque([[start]]), {start}
+    while queue:
+        path = queue.popleft()
+        node = path[-1]
+        if node == end:
+            return path
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(path + [neighbor])
+    return None
+
+def draw_graph(graph, shortest_path=None):
+    G = nx.Graph()
+    for node, neighbors in graph.items():
+        for neighbor in neighbors:
+            G.add_edge(node, neighbor)
+
+    pos = nx.spring_layout(G)
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_color='gray',
+            node_size=2000, font_size=15, font_weight='bold', ax=ax)
+
+    if shortest_path:
+        edges = list(zip(shortest_path, shortest_path[1:]))
+        nx.draw_networkx_edges(G, pos, edgelist=edges, edge_color='red', width=2, style='dashed', ax=ax)
+        nx.draw_networkx_nodes(G, pos, nodelist=shortest_path, node_color='lightgreen', ax=ax)
+
+    ax.set_title("Graph with Shortest Path")
+    return fig
+
+def display_graph():
+    start = start_entry.get().strip()
+    end = end_entry.get().strip()
+
+    if start not in graph or end not in graph:
+        messagebox.showerror("Error", "Invalid nodes.")
+        return
+
+    shortest_path = bfs_shortest_path(graph, start, end)
+    result_label.config(text=f"Shortest path: {shortest_path if shortest_path else 'No path found.'}")
+
+    fig = draw_graph(graph, shortest_path)
+    canvas = FigureCanvasTkAgg(fig, master=window)
+    canvas.draw()
+    canvas.get_tk_widget().grid(row=4, column=0, columnspan=3, pady=10)
+
+# Graph definition (same as in the PDF)
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# GUI setup
+window = tk.Tk()
+window.title("BFS Shortest Path Finder")
+window.geometry("700x600")
+
+tk.Label(window, text="Start Node:").grid(row=0, column=0, padx=10, pady=10, sticky="e")
+start_entry = tk.Entry(window)
+start_entry.grid(row=0, column=1, padx=10, pady=10)
+
+tk.Label(window, text="End Node:").grid(row=1, column=0, padx=10, pady=10, sticky="e")
+end_entry = tk.Entry(window)
+end_entry.grid(row=1, column=1, padx=10, pady=10)
+
+search_button = tk.Button(window, text="Find Shortest Path", command=display_graph)
+search_button.grid(row=2, column=0, columnspan=3, pady=10)
+
+result_label = tk.Label(window, text="")
+result_label.grid(row=3, column=0, columnspan=3, pady=10)
+
+window.mainloop()
+network broadcasting, and level-based traversal of nodes. The BFS algorithm guarantees the 
+shortest path in an unweighted graph, making it a robust choice for pathfinding problems.
