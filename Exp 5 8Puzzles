@@ -1,0 +1,390 @@
+
+1. To understand the representation of the 8-puzzle problem and its solution space.
+2. To implement the Best-First Search algorithm using suitable heuristics.
+3. To compare the performance of different heuristic strategies in solving the puzzle.
+Theory:
+The 8-puzzle is a case study in artificial intelligence, with original objectives to arrange a 3x3 
+grid of tiles from a scrambled initial state to a specified goal arrangement. The puzzle comprises 
+8 numbered tiles and 1 blank space-stipulating a movement mechanism that moves the tiles in 
+use to the adjacent space vacated by the blank tile-by-shelling out the blank either horizontally 
+or vertically. The objective is to attain a goal state in the shortest most steps possible.
+Best First Search
+Best First Search (BFS) is a heuristic-driven search strategy that exploits the choices made by 
+selecting to expand the most promising node based on an evaluation function. In the 8-puzzle, 
+Best First Search selects nodes to expand based on an estimate of their desirableness, quantified 
+through some heuristic measure.
+The Best-First Search algorithm uses a heuristic to evaluate which state to explore next.:
+Manhattan Distance Heuristic (h2): Computes the sum of the distances of the tiles from their 
+goal positions, where distance is defined as the sum of the vertical and horizontal distances.
+The Best-First Search algorithm selects the node with the lowest heuristic value for expansion, 
+which helps in guiding the search toward the goal efficiently.
+Advantages Of Best First Search:
+1. Efficient Pathfinding: BFS prioritizes nodes that are closer to the goal based on a 
+heuristic, which can lead to faster solutions, especially with informed heuristics like Manhattan Distance or Misplaced Tile. This is particularly useful for puzzles like the 
+8-puzzle, where the search space can be large.
+2. Reduced Search Space: By focusing on nodes that appear closer to the goal state, 
+BFS can significantly reduce the number of nodes explored, making it more efficient 
+than uninformed search algorithms like Breadth-First Search or Depth-First Search.
+3. Flexibility with Heuristics: BFS canAim: To solve the 8-puzzle problem using the Best-First Search algorithm and compare the 
+efficiency of two heuristic functions: the Misplaced Tile heuristic and the Manhattan Distance 
+heuristic.
+Objective:
+1. To understand the representation of the 8-puzzle problem and its solution space.
+2. To implement the Best-First Search algorithm using suitable heuristics.
+3. To compare the performance of different heuristic strategies in solving the puzzle.
+Theory:
+The 8-puzzle is a case study in artificial intelligence, with original objectives to arrange a 3x3 
+grid of tiles from a scrambled initial state to a specified goal arrangement. The puzzle comprises 
+8 numbered tiles and 1 blank space-stipulating a movement mechanism that moves the tiles in 
+use to the adjacent space vacated by the blank tile-by-shelling out the blank either horizontally 
+or vertically. The objective is to attain a goal state in the shortest most steps possible.
+Best First Search
+Best First Search (BFS) is a heuristic-driven search strategy that exploits the choices made by 
+selecting to expand the most promising node based on an evaluation function. In the 8-puzzle, 
+Best First Search selects nodes to expand based on an estimate of their desirableness, quantified 
+through some heuristic measure.
+The Best-First Search algorithm uses a heuristic to evaluate which state to explore next.:
+Manhattan Distance Heuristic (h2): Computes the sum of the distances of the tiles from their 
+goal positions, where distance is defined as the sum of the vertical and horizontal distances.
+The Best-First Search algorithm selects the node with the lowest heuristic value for expansion, 
+which helps in guiding the search toward the goal efficiently.
+Advantages Of Best First Search:
+1. Efficient Pathfinding: BFS prioritizes nodes that are closer to the goal based on a 
+heuristic, which can lead to faster solutions, especially with informed heuristics like Manhattan Distance or Misplaced Tile. This is particularly useful for puzzles like the 
+8-puzzle, where the search space can be large.
+2. Reduced Search Space: By focusing on nodes that appear closer to the goal state, 
+BFS can significantly reduce the number of nodes explored, making it more efficient 
+than uninformed search algorithms like Breadth-First Search or Depth-First Search.
+3. Flexibility with Heuristics: BFS can use different heuristic functions, allowing 
+flexibility and the ability to optimize based on heuristic accuracy. For example, the 
+Manhattan Distance heuristic is more effective for the 8-puzzle than the Misplaced Tile 
+heuristic because it considers the actual distance.
+Disadvantages Of Best First Search:
+1. Heuristic Dependency: The performance of BFS heavily relies on the quality of the 
+heuristic. An inaccurate heuristic can lead to poor performance, causing the algorithm 
+to explore many unnecessary nodes, slowing down the search.
+2. Computational Complexity For Deep Solutions : For puzzles that require a large 
+number of moves to reach the solution, BFS can become computationally expensive 
+due to the high depth and the need to evaluate many potential paths, especially if the 
+heuristic is less effective.
+3. Potentially High Memory Usage: BFS maintains a priority queue with nodes to be 
+explored, which can consume significant memory, especially if the search space is large 
+or if many states have similar heuristic values. For large or complex puzzles, this can 
+lead to memory exhaustion.
+Applications Of Best First Search:
+1. Pathfinding in Games: BFS algorithms are frequently employed in video games 
+to find how a character or an object can reach its goal from the starting point 
+without colliding with any other object in the fastest manner
+2. Robotics: In robotics, BFS algorithms are useful for applying movement in the 
+presence of navigation. These algorithms help the robots look for the best paths in 
+real-time as they move and perform duties. 3. Artificial Intelligence: BFS algorithms are very important to AI when it comes to 
+providing solutions to difficult issues like NL, ML, and decision-making
+solutions. They support AI systems in assessing different options and deciding 
+which option to take.
+4. Navigation Systems: Navigation systems, including GPS, use BFS algorithms to 
+determine the shortest and quickest means of traveling. The algorithms' efficiency 
+in calculating and generating preferable routes in a short span of time, especially 
+when viewing large volumes of traffic data, benefits this application.
+Introduction:
+The 8-puzzle problem is an interesting case in state exploration and in pathfinding, which 
+makes it a good candidate for search algorithm study. Best-First Search, as a heuristic-based 
+search, pays more attention to nodes that seem close to the goal and is simpler than uninformed 
+search strategies, such as Breadth-First Search. We will implement the search algorithm with 
+the parameters of the heuristics used: Misplaced Tiles and Manhattan Distance-and by the end-
+compare their performance for what it takes to achieve the solution in the 8-puzzle problem.
+Implementation:
+1. Define the State Representation: Each state will be represented by a tuple containing 
+the configuration of the tiles and the position of the empty space.
+2. Heuristic Functions: Implement the two heuristics (h1 and h2) to evaluate the cost of 
+reaching the goal.
+3. Best-First Search Algorithm: Implement the search algorithm that utilizes a priority 
+queue to manage nodes based on their heuristic values.
+4. Goal Test: Check if the current state matches the goal state.
+5. Execution: Run the algorithm on a set of initial states and record the number of nodes 
+expanded and the solution path length for both heuristics. use different heuristic functions, allowing 
+flexibility and the ability to optimize based on heuristic accuracy. For example, the 
+Manhattan Distance heuristic is more effective for the 8-puzzle than the Misplaced Tile 
+heuristic because it considers the actual distance.
+Disadvantages Of Best First Search:
+1. Heuristic Dependency: The performance of BFS heavily relies on the quality of the 
+heuristic. An inaccurate heuristic can lead to poor performance, causing the algorithm 
+to explore many unnecessary nodes, slowing down the search.
+2. Computational Complexity For Deep Solutions : For puzzles that require a large 
+number of moves to reach the solution, BFS can become computationally expensive 
+due to the high depth and the need to evaluate many potential paths, especially if the 
+heuristic is less effective.
+3. Potentially High Memory Usage: BFS maintains a priority queue with nodes to be 
+explored, which can consume significant memory, especially if the search space is large 
+or if many states have similar heuristic values. For large or complex puzzles, this can 
+lead to memory exhaustion.
+Applications Of Best First Search:
+1. Pathfinding in Games: BFS algorithms are frequently employed in video games 
+to find how a character or an object can reach its goal from the starting point 
+without colliding with any other object in the fastest manner
+2. Robotics: In robotics, BFS algorithms are useful for applying movement in the 
+presence of navigation. These algorithms help the robots look for the best paths in 
+real-time as they move and perform duties. 3. Artificial Intelligence: BFS algorithms are very important to AI when it comes to 
+providing solutions to difficult issues like NL, ML, and decision-making
+solutions. They support AI systems in assessing different options and deciding 
+which option to take.
+4. Navigation Systems: Navigation systems, including GPS, use BFS algorithms to 
+determine the shortest and quickest means of traveling. The algorithms' efficiency 
+in calculating and generating preferable routes in a short span of time, especially 
+when viewing large volumes of traffic data, benefits this application.
+Introduction:
+The 8-puzzle problem is an interesting case in state exploration and in pathfinding, which 
+makes it a good candidate for search algorithm study. Best-First Search, as a heuristic-based 
+search, pays more attention to nodes that seem close to the goal and is simpler than uninformed 
+search strategies, such as Breadth-First Search. We will implement the search algorithm with 
+the parameters of the heuristics used: Misplaced Tiles and Manhattan Distance-and by the end-
+compare their performance for what it takes to achieve the solution in the 8-puzzle problem.
+Implementation:
+1. Define the State Representation: Each state will be represented by a tuple containing 
+the configuration of the tiles and the position of the empty space.
+2. Heuristic Functions: Implement the two heuristics (h1 and h2) to evaluate the cost of 
+reaching the goal.
+3. Best-First Search Algorithm: Implement the search algorithm that utilizes a priority 
+queue to manage nodes based on their heuristic values.
+4. Goal Test: Check if the current state matches the goal state.
+5. Execution: Run the algorithm on a set of initial states and record the number of nodes 
+expanded and the solution path length for both heuristics. Evaluation of Manhattan Distance Heuristic for Optimal Puzzle Solving:
+Criteria Manhattan Distance Heuristic
+Definition Computes the sum of the distances each tile is from its goal 
+position, considering only vertical and horizontal moves.
+Accuracy More accurate, as it accounts for the total moves needed to 
+reach each tile’s position.
+Node Expansions Requires fewer node expansions due to better guidance 
+toward the goal state.
+Performance Faster solution by focusing on reducing total moves to reach 
+the goal.
+Use Case Preferred for more complex puzzles needing efficient 
+exploration.
+Best-Fit Context Provides better accuracy and efficiency, especially in puzzles 
+with larger search spaces.
+Conclusion: 
+We successfully demonstrated that the Best-First Search algorithm can solve the 8-puzzle 
+problem using heuristic strategies. Both the Manhattan Distance and Misplaced Tiles heuristics 
+guided the search effectively, but the Manhattan Distance heuristic usually required fewer node 
+expansions. This shows the importance of choosing the right heuristics in optimizing search 
+algorithms and highlights the practical applications of AI in solving problems.presentation of the 8-puzzle problem and its solution space.
+2. To implement the Best-First Search algorithm using suitable heuristics.
+3. To compare the performance of different heuristic strategies in solving the puzzle.
+Theory:
+The 8-puzzle is a case study in artificial intelligence, with original objectives to arrange a 3x3 
+grid of tiles from a scrambled initial state to a specified goal arrangement. The puzzle comprises 
+8 numbered tiles and 1 blank space-stipulating a movement mechanism that moves the tiles in 
+use to the adjacent space vacated by the blank tile-by-shelling out the blank either horizontally 
+or vertically. The objective is to attain a goal state in the shortest most steps possible.
+Best First Search
+Best First Search (BFS) is a heuristic-driven search strategy that exploits the choices made by 
+selecting to expand the most promising node based on an evaluation function. In the 8-puzzle, 
+Best First Search selects nodes to expand based on an estimate of their desirableness, quantified 
+through some heuristic measure.
+The Best-First Search algorithm uses a heuristic to evaluate which state to explore next.:
+Manhattan Distance Heuristic (h2): Computes the sum of the distances of the tiles from their 
+goal positions, where distance is defined as the sum of the vertical and horizontal distances.
+The Best-First Search algorithm selects the node with the lowest heuristic value for expansion, 
+which helps in guiding the search toward the goal efficiently.
+Advantages Of Best First Search:
+1. Efficient Pathfinding: BFS prioritizes nodes that are closer to the goal based on a 
+heuristic, which can lead to faster solutions, especially with informed heuristics like Manhattan Distance or Misplaced Tile. This is particularly useful for puzzles like the 
+8-puzzle, where the search space can be large.
+2. Reduced Search Space: By focusing on nodes that appear closer to the goal state, 
+BFS can significantly reduce the number of nodes explored, making it more efficient 
+than uninformed search algorithms like Breadth-First Search or Depth-First Search.
+3. Flexibility with Heuristics: BFS can use different heuristic functions, allowing 
+flexibility and the ability to optimize based on heuristic accuracy. For example, the 
+Manhattan Distance heuristic is more effective for the 8-puzzle than the Misplaced Tile 
+heuristic because it considers the actual distance.
+Disadvantages Of Best First Search:
+1. Heuristic Dependency: The performance of BFS heavily relies on the quality of the 
+heuristic. An inaccurate heuristic can lead to poor performance, causing the algorithm 
+to explore many unnecessary nodes, slowing down the search.
+2. Computational Complexity For Deep Solutions : For puzzles that require a large 
+number of moves to reach the solution, BFS can become computationally expensive 
+due to the high depth and the need to evaluate many potential paths, especially if the 
+heuristic is less effective.
+3. Potentially High Memory Usage: BFS maintains a priority queue with nodes to be 
+explored, which can consume significant memory, especially if the search space is large 
+or if many states have similar heuristic values. For large or complex puzzles, this can 
+lead to memory exhaustion.
+Applications Of Best First Search:
+1. Pathfinding in Games: BFS algorithms are frequently employed in video games 
+to find how a character or an object can reach its goal from the starting point 
+without colliding with any other object in the fastest manner
+2. Robotics: In robotics, BFS algorithms are useful for applying movement in the 
+presence of navigation. These algorithms help the robots look for the best paths in 
+real-time as they move and perform duties. 3. Artificial Intelligence: BFS algorithms are very important to AI when it comes to 
+providing solutions to difficult issues like NL, ML, and decision-making
+solutions. They support AI systems in assessing different options and deciding 
+which option to take.
+4. Navigation Systems: Navigation systems, including GPS, use BFS algorithms to 
+determine the shortest and quickest means of traveling. The algorithms' efficiency 
+in calculating and generating preferable routes in a short span of time, especially 
+when viewing large volumes of traffic data, benefits this application.
+Introduction:
+The 8-puzzle problem is an interesting case in state exploration and in pathfinding, which 
+makes it a good candidate for search algorithm study. Best-First Search, as a heuristic-based 
+search, pays more attention to nodes that seem close to the goal and is simpler than uninformed 
+search strategies, such as Breadth-First Search. We will implement the search algorithm with 
+the parameters of the heuristics used: Misplaced Tiles and Manhattan Distance-and by the end-
+compare their performance for what it takes to achieve the solution in the 8-puzzle problem.
+Implementation:
+1. Define the State Representation: Each state will be represented by a tuple containing 
+the configuration of the tiles and the position of the empty space.
+2. Heuristic Functions: Implement the two heuristics (h1 and h2) to evaluate the cost of 
+reaching the goal.
+3. Best-First Search Algorithm: Implement the search algorithm that utilizes a priority 
+queue to manage nodes based on their heuristic values.
+4. Goal Test: Check if the current state matches the goal state.
+5. Execution: Run the algorithm on a set of initial states and record the number of nodes 
+expanded and the solution path length for both heuristics. Evaluation of Manhattan Distance Heuristic for Optimal Puzzle Solving:
+Criteria Manhattan Distance Heuristic
+Definition Computes the sum of the distances each tile is from its goal 
+position, considering only vertical and horizontal moves.
+Accuracy More accurate, as it accounts for the total moves needed to 
+reach each tile’s position.
+Node Expansions Requires fewer node expansions due to better guidance 
+toward the goal state.
+Performance Faster solution by focusing on reducing total moves to reach 
+the goal.
+Use Case Preferred for more complex puzzles needing efficient 
+exploration.
+Best-Fit Context Provides better accuracy and efficiency, especially in puzzles 
+with larger search spaces.
+Conclusion: 
+We successfully demonstrated that the Best-First Search algorithm can solve the 8-puzzle 
+problem using heuristic strategies. Both the Manhattan Distance and Misplaced Tiles heuristics 
+guided the search effectively, but the Manhattan Distance heuristic usually required fewer node 
+expansions. This shows the importance of choosing the right heuristics in optimizing search 
+algorithms and highlights the practical applications of AI in solving problems.
+
+Code :
+
+import tkinter as tk
+import heapq
+import copy
+import time
+
+GOAL_STATE = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+
+# Heuristic function: Manhattan Distance
+def manhattan_distance(state):
+    distance = 0
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] != 0:
+                goal_x, goal_y = divmod(state[i][j] - 1, 3)
+                distance += abs(i - goal_x) + abs(j - goal_y)
+    return distance
+
+# Function to get position of blank tile (0)
+def get_blank_pos(state):
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] == 0:
+                return i, j
+
+# Generate all possible moves (successors) by moving the blank tile
+def generate_successors(state):
+    successors = []
+    x, y = get_blank_pos(state)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Up, Down, Left, Right
+
+    for dx, dy in directions:
+        new_x, new_y = x + dx, y + dy
+        if 0 <= new_x < 3 and 0 <= new_y < 3:
+            new_state = copy.deepcopy(state)
+            new_state[x][y], new_state[new_x][new_y] = new_state[new_x][new_y], new_state[x][y]
+            successors.append(new_state)
+    return successors
+
+# Best-First Search Algorithm with timeout
+def best_first_search(initial_state, heuristic, timeout=10):
+    start_time = time.time()
+    frontier = []
+    heapq.heappush(frontier, (0, initial_state))
+    visited = set()
+    visited.add(tuple(tuple(row) for row in initial_state))
+    path = []  # to store solution path
+
+    while frontier:
+
+        # Check for timeout
+        if time.time() - start_time > timeout:
+            print("Search timed out.")
+            return None
+
+        _, current_state = heapq.heappop(frontier)
+        path.append(current_state)
+
+        # Goal check
+        if current_state == GOAL_STATE:
+            print("Solution found!")
+            return path  # return the solution path
+
+        for successor in generate_successors(current_state):
+            successor_tuple = tuple(tuple(row) for row in successor)
+            if successor_tuple not in visited:
+                visited.add(successor_tuple)
+                cost = heuristic(successor)
+                heapq.heappush(frontier, (cost, successor))
+
+    print("No solution found within the time limit.")
+    return None
+
+# GUI Code
+class PuzzleApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("8-Puzzle Solver")
+        self.initial_state = [[1, 2, 3], [4, 8, 0], [7, 6, 5]]
+        self.buttons = []
+
+        # Create UI grid for puzzle
+        for i in range(3):
+            row = []
+            for j in range(3):
+                btn = tk.Button(root, text=str(self.initial_state[i][j]),
+                                width=5, height=2, font=("Helvetica", 18))
+                btn.grid(row=i, column=j, padx=5, pady=5)
+                row.append(btn)
+            self.buttons.append(row)
+
+        # Solve button
+        solve_button = tk.Button(root, text="Solve", command=self.solve)
+        solve_button.grid(row=3, column=0, columnspan=3)
+
+    def update_buttons(self, state):
+        for i in range(3):
+            for j in range(3):
+                tile_value = state[i][j]
+                text = "" if tile_value == 0 else str(tile_value)
+
+                # Set colors based on tile state
+                if tile_value == 0:
+                    bg_color = "skyblue"  # updated color for blank tile
+                elif state[i][j] == GOAL_STATE[i][j]:
+                    bg_color = "lightgreen"  # color for goal state tile
+                else:
+                    bg_color = "lightcoral"  # color for other tiles
+
+                self.buttons[i][j].config(text=text, bg=bg_color,
+                                          fg="black", relief="raised" if tile_value else "sunken")
+
+    def solve(self):
+        print("Starting the solution process...")
+        solution_path = best_first_search(self.initial_state, manhattan_distance)
+
+        if solution_path:
+            for state in solution_path:
+                self.update_buttons(state)
+                self.root.update()
+                self.root.after(500)  # wait 500 ms between moves
+
+# Main Execution
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = PuzzleApp(root)
+    root.mainloop()
+
