@@ -1,0 +1,95 @@
+Aim: Study of PROLOG. Write the following programs using PROLOG
+Objectives: 
+1. Understand Logic Programming Fundamentals
+2. Master Knowledge Representation Techniques
+3. Develop Problem-Solving and Inference Skills
+4. Prepare for Advanced AI and Logic-Based Applications
+Theory:
+What is Prolog?
+Prolog (short for Programming in Logic) is a high-level programming language 
+rooted in formal logic, primarily used for solving problems that involve complex 
+relationships and symbolic reasoning. Developed in the 1970s, it is particularly well-
+suited for tasks in artificial intelligence, such as natural language processing, expert 
+systems, and problem-solving applications.
+Features of Prolog:
+1. Declarative Nature: Prolog is a declarative language, meaning you define 
+what the problem is rather than detailing how to solve it. The program is 
+essentially a set of facts and rules about the problem domain.
+2. Facts and Rules: Prolog programs are written as facts (basic statements about 
+data) and rules (logical statements that define relationships). For example: ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+3. Queries: You can ask questions (queries) based on the facts and rules you've 
+defined. Prolog will attempt to find solutions based on logical inferences.
+ ?- ancestor(john, mary).
+4. Backtracking: Prolog uses a backtracking mechanism to find solutions by 
+trying multiple possibilities and backtracking to find alternative solutions if 
+necessary.
+Applications of Prolog:
+1. Natural Language Processing: 
+Prolog can be used to parse and understand human languages by defining 
+grammatical rules and structures.
+2. Expert Systems: 
+Prolog is effective in building systems that mimic human experts by applying 
+logical rules to infer conclusions from a set of knowledge.
+3. Knowledge Representation: 
+Prolog allows for complex Aim: Study of PROLOG. Write the following programs using PROLOG
+Objectives: 
+1. Understand Logic Programming Fundamentals
+2. Master Knowledge Representation Techniques
+3. Develop Problem-Solving and Inference Skills
+4. Prepare for Advanced AI and Logic-Based Applications
+Theory:
+What is Prolog?
+Prolog (short for Programming in Logic) is a high-level programming language 
+rooted in formal logic, primarily used for solving problems that involve complex 
+relationships and symbolic reasoning. Developed in the 1970s, it is particularly well-
+suited for tasks in artificial intelligence, such as natural language processing, expert 
+systems, and problem-solving applications.
+Features of Prolog:
+1. Declarative Nature: Prolog is a declarative language, meaning you define 
+what the problem is rather than detailing how to solve it. The program is 
+essentially a set of facts and rules about the problem domain.
+2. Facts and Rules: Prolog programs are written as facts (basic statements about 
+data) and rules (logical statements that define relationships). For example: ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+3. Queries: You can ask questions (queries) based on the facts and rules you've 
+defined. Prolog will attempt to find solutions based on logical inferences.
+ ?- ancestor(john, mary).
+4. Backtracking: Prolog uses a backtracking mechanism to find solutions by 
+trying multiple possibilities and backtracking to find alternative solutions if 
+necessary.
+Applications of Prolog:
+1. Natural Language Processing: 
+Prolog can be used to parse and understand human languages by defining 
+grammatical rules and structures.
+2. Expert Systems: 
+Prolog is effective in building systems that mimic human experts by applying 
+logical rules to infer conclusions from a set of knowledge.
+3. Knowledge Representation: 
+Prolog allows for complex relationships and facts to be represented logically, 
+which is useful in various fields including linguistics and cognitive science.relationships and facts to be represented logically, 
+which is useful in various fields including linguistics and cognitive science.
+
+
+Code : 
+
+
+% Practical 1 - Prolog Program
+parent(john, mary).
+parent(jane, mary).
+parent(john, bob).
+parent(jane, bob).
+parent(mary, alice).
+
+sibling(X, Y) :-
+    parent(Z, X),
+    parent(Z, Y),
+    X \= Y.
+
+ancestor(X, Y) :-
+    parent(X, Y).
+ancestor(X, Y) :-
+    parent(Z, Y),
+    ancestor(X, Z).
+
+child(X, Y) :- parent(Y, X).
